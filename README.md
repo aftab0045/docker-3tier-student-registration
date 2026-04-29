@@ -64,8 +64,209 @@ The application allows users to fill out a **student registration form**, which 
 - **dbnet**
   - Connects: PHP ↔ MySQL
 
-👉 This ensures **secure and isolated communication** between layers.
+This ensures **secure and isolated communication** between layers.
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
+![](/img/Screenshot%202026-04-29%20142224.png)
+
+
+---
+
+##  Technologies Used
+
+- Docker
+- Docker Compose
+- Nginx
+- PHP (PHP-FPM)
+- MySQL
+- HTML/CSS
+
+---
+
+##  Setup & Installation
+
+### Step 1: Create Project Directory
+
+```bash
+sudo -i
+mkdir /root/3-tier-project
+cd /root/3-tier-project
+```
+
+---
+
+### Step 2: Create Folder Structure
+
+```bash
+mkdir web app db
+mkdir web/code web/config
+mkdir app/code
+```
+![](/img/Screenshot%202026-04-29%20142224.png)
+
+---
+
+### Step 3: Frontend (HTML)
+
+ Create file:
+
+```bash
+nano web/code/signup.html
+```
+
+ Paste your frontend form code (you can use your custom styled UI)
+
+---
+
+### Step 4: Nginx Configuration
+
+Create file:
+
+```bash
+nano web/config/default.conf
+```
+
+ Configure:
+
+* Serve static HTML from `/usr/share/nginx/html`
+* Forward `.php` requests to **app container (FastCGI)**
+
+---
+
+###  Step 5: Backend (PHP)
+
+ Create file:
+
+```bash
+nano app/code/submit.php
+```
+
+ Add PHP code to:
+
+* Receive form data
+* Connect to MySQL (`host = db`)
+* Insert into database
+
+---
+
+###  Step 6: PHP Dockerfile
+
+ Create file:
+
+```bash
+nano app/Dockerfile
+```
+
+ Key points:
+
+* Use `php:7.4-fpm`
+* Install `mysqli` extension
+* Set working directory `/app`
+
+---
+
+### Step 7: Database Setup
+
+###  Create SQL file:
+
+```bash
+nano db/init.sql
+```
+
+ Add:
+
+* Create database (FCT)
+* Create table (users)
+
+---
+
+###  Create DB Dockerfile:
+
+```bash
+nano db/Dockerfile
+```
+
+ Configure:
+
+* MySQL image
+* Root password
+* Copy `init.sql`
+* Expose port 3306
+
+---
+
+###  Step 8: Docker Compose
+
+ Create file:
+
+```bash
+nano docker-compose.yml
+```
+
+ Define 3 services:
+
+###  web
+
+* nginx image
+* port 80
+* mount HTML + config
+* connect to `webnet`
+
+###  app
+
+* build from `./app`
+* mount PHP code
+* connect to `webnet` + `dbnet`
+
+###  db
+
+* build from `./db`
+* volume for persistence
+* connect to `dbnet`
+
+---
+
+### Step 9: Run Project
+
+```bash
+docker compose up -d --build
+```
+
+---
+
+### Step 10: Access Application
+
+Open in browser:
+
+```
+http://<your-server-ip>
+```
+
+---
+
+### Step 11: Verify Database
+
+```bash
+docker exec -it <db-container> mysql -u root -p
+```
+
+Then:
+
+```sql
+USE FCT;
+SELECT * FROM users;
+```
+
+---
+
+### Step 12: Stop Project
+
+```bash
+docker compose down
+```
+
+---
+
+
