@@ -159,6 +159,7 @@ nano app/code/submit.php
 nano app/Dockerfile
 ```
 
+
  Key points:
 
 * Use `php:7.4-fpm`
@@ -174,6 +175,7 @@ nano app/Dockerfile
 ```bash
 nano db/init.sql
 ```
+![](/img/Screenshot%202026-04-29%20141734.png)
 
  Add:
 
@@ -187,6 +189,8 @@ nano db/init.sql
 ```bash
 nano db/Dockerfile
 ```
+
+![](/img/Screenshot%202026-04-29%20141705.png)
 
  Configure:
 
@@ -233,6 +237,8 @@ nano docker-compose.yml
 ```bash
 docker compose up -d --build
 ```
+![](/img/Screenshot%202026-04-29%20142350.png)
+![](/img/Screenshot%202026-04-29%20142406.png)
 
 ---
 
@@ -244,6 +250,10 @@ Open in browser:
 http://<your-server-ip>
 ```
 
+![](/img/Screenshot%202026-04-29%20142542.png)
+
+
+![](/img/Screenshot%202026-04-29%20143440.png)
 ---
 
 ### Step 11: Verify Database
@@ -251,6 +261,7 @@ http://<your-server-ip>
 ```bash
 docker exec -it <db-container> mysql -u root -p
 ```
+![](/img/Screenshot%202026-04-29%20143922.png)
 
 Then:
 
@@ -268,5 +279,9 @@ docker compose down
 ```
 
 ---
+
+
+
+
 
 

@@ -1,0 +1,11 @@
+CREATE DATABASE IF NOT EXISTS FCT;
+USE FCT;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    website VARCHAR(100),
+    comment TEXT,
+    gender VARCHAR(10)
+);
