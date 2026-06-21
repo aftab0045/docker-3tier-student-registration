@@ -3,6 +3,7 @@
 ##  Project Overview
 This project demonstrates a **3-tier web application architecture** using Docker and Docker Compose.
 
+
 It includes:
 -  **Web Layer (Nginx)** – Serves frontend and routes requests  
 -  **Application Layer (PHP-FPM)** – Processes form data  
